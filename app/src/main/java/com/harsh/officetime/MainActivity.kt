@@ -2,7 +2,6 @@ package com.harsh.officetime
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
@@ -11,6 +10,7 @@ import com.harsh.officetime.util.CalenderUtil.getCurrentYear
 import com.harsh.officetime.util.CalenderUtil.getNextMonth
 import com.harsh.officetime.util.CalenderUtil.getPreviousMonth
 import com.harsh.officetime.widget.TitleTextView
+import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,39 +30,44 @@ class MainActivity : AppCompatActivity() {
         val leftArrow: AppCompatImageView = findViewById(R.id.month_nav_left)
         val rightArrow: AppCompatImageView = findViewById(R.id.month_nav_right)
 
-        val dateNavigator = DateNavigator(titleMonth, titleYear, leftArrow, rightArrow)
+        val dateNavigator = DateNavigator(
+            WeakReference(titleMonth), WeakReference(titleYear),
+            WeakReference(leftArrow), WeakReference(rightArrow)
+        )
         leftArrow.setOnClickListener(dateNavigator)
         rightArrow.setOnClickListener(dateNavigator)
     }
 
     class DateNavigator(
-        monthTextView: TitleTextView,
-        yearTextView: TitleTextView,
-        leftArrow: AppCompatImageView,
-        rightArrow: AppCompatImageView
+        monthTextViewRef: WeakReference<TitleTextView>,
+        yearTextViewRef: WeakReference<TitleTextView>,
+        leftArrowRef: WeakReference<AppCompatImageView>,
+        rightArrowRef: WeakReference<AppCompatImageView>
     ) :
         View.OnClickListener {
 
-        private var monthTextView: TitleTextView
-        private var yearTextView: TitleTextView
+        private var monthTextViewRef: WeakReference<TitleTextView>
+        private var yearTextViewRef: WeakReference<TitleTextView>
 
         init {
-            leftArrow.setOnClickListener(this)
-            rightArrow.setOnClickListener(this)
-            this.monthTextView = monthTextView
-            this.yearTextView = yearTextView
+            leftArrowRef.get()?.setOnClickListener(this)
+            rightArrowRef.get()?.setOnClickListener(this)
+            this.monthTextViewRef = monthTextViewRef
+            this.yearTextViewRef = yearTextViewRef
         }
 
         override fun onClick(v: View?) {
             if (v?.id == R.id.month_nav_left) {
-                monthTextView.text = getPreviousMonth(monthTextView.text.toString())
-                if (TextUtils.equals(monthTextView.text.toString().toLowerCase(), "dec")) {
-                    yearTextView.text = (Integer.parseInt(yearTextView.text.toString()) - 1).toString()
+                monthTextViewRef.get()?.text = getPreviousMonth(monthTextViewRef.get()?.text.toString())
+                if (TextUtils.equals(monthTextViewRef.get()?.text.toString().toLowerCase(), "dec")) {
+                    yearTextViewRef.get()?.text =
+                        (Integer.parseInt(yearTextViewRef.get()?.text.toString()) - 1).toString()
                 }
             } else {
-                monthTextView.text = getNextMonth(monthTextView.text.toString())
-                if (TextUtils.equals(monthTextView.text.toString().toLowerCase(), "jan")) {
-                    yearTextView.text = (Integer.parseInt(yearTextView.text.toString()) + 1).toString()
+                monthTextViewRef.get()?.text = getNextMonth(monthTextViewRef.get()?.text.toString())
+                if (TextUtils.equals(monthTextViewRef.get()?.text.toString().toLowerCase(), "jan")) {
+                    yearTextViewRef.get()?.text =
+                        (Integer.parseInt(yearTextViewRef.get()?.text.toString()) + 1).toString()
                 }
             }
         }

@@ -1,44 +1,35 @@
 package com.harsh.officetime
 
 import android.os.Bundle
-import android.text.TextUtils
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatImageView
-import com.harsh.officetime.util.CalenderUtil.getCurrentMonth
-import com.harsh.officetime.util.CalenderUtil.getCurrentYear
-import com.harsh.officetime.util.CalenderUtil.getNextMonth
-import com.harsh.officetime.util.CalenderUtil.getPreviousMonth
-import com.harsh.officetime.widget.TitleTextView
-import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var titleMonth: TitleTextView
-    private lateinit var titleYear: TitleTextView
+/*    private lateinit var titleMonth: TitleTextView
+    private lateinit var titleYear: TitleTextView*/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        titleMonth = findViewById(R.id.title_month)
-        titleMonth.text = getCurrentMonth()
+        /* titleMonth = findViewById(R.id.title_month)
+         titleMonth.text = getCurrentMonth()
 
-        titleYear = findViewById(R.id.title_year)
-        titleYear.text = getCurrentYear().toString()
+         titleYear = findViewById(R.id.title_year)
+         titleYear.text = getCurrentYear().toString()
 
-        val leftArrow: AppCompatImageView = findViewById(R.id.month_nav_left)
-        val rightArrow: AppCompatImageView = findViewById(R.id.month_nav_right)
+         val leftArrow: AppCompatImageView = findViewById(R.id.month_nav_left)
+         val rightArrow: AppCompatImageView = findViewById(R.id.month_nav_right)
 
-        val dateNavigator = DateNavigator(
-            WeakReference(titleMonth), WeakReference(titleYear),
-            WeakReference(leftArrow), WeakReference(rightArrow)
-        )
-        leftArrow.setOnClickListener(dateNavigator)
-        rightArrow.setOnClickListener(dateNavigator)
+         val dateNavigator = DateNavigator(
+             WeakReference(titleMonth), WeakReference(titleYear),
+             WeakReference(leftArrow), WeakReference(rightArrow)
+         )
+         leftArrow.setOnClickListener(dateNavigator)
+         rightArrow.setOnClickListener(dateNavigator)*/
     }
 
-    class DateNavigator(
+   /* class DateNavigator(
         monthTextViewRef: WeakReference<TitleTextView>,
         yearTextViewRef: WeakReference<TitleTextView>,
         leftArrowRef: WeakReference<AppCompatImageView>,
@@ -71,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
+    }*/
 }
 
 

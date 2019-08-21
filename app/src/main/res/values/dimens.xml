@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="month_title_size">28sp</dimen>
-    <dimen name="year_title_size">14sp</dimen>
+
 </resources>

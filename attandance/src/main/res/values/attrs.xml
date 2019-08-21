@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AttendanceCalender">
+        <attr name="android:padding" />
+        <attr name="android:paddingTop" />
+        <attr name="android:paddingBottom" />
+        <attr name="android:paddingLeft" />
+        <attr name="android:paddingRight" />
+
+    </declare-styleable>
+</resources>

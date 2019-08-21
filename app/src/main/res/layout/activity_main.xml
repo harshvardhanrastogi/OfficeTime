@@ -7,51 +7,17 @@
     android:background="@android:color/white"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/month_nav_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/title_month"
-        app:layout_constraintEnd_toStartOf="@+id/title_month"
-        app:layout_constraintTop_toTopOf="@+id/title_month"
-        app:srcCompat="@drawable/ic_round_arrow_left_24px" />
 
-
-    <com.harsh.officetime.widget.TitleTextView
-        android:id="@+id/title_month"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:textColor="#333333"
-        android:textSize="@dimen/month_title_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="JAN" />
-
-    <com.harsh.officetime.widget.TitleTextView
-        android:id="@+id/title_year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="#333333"
-        android:textSize="@dimen/year_title_size"
-        app:layout_constraintEnd_toEndOf="@+id/title_month"
-        app:layout_constraintStart_toStartOf="@+id/title_month"
-        app:layout_constraintTop_toBottomOf="@+id/title_month"
-        tools:text="2019" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/month_nav_right"
-        android:layout_width="wrap_content"
+    <com.harsh.attandance.widget.AttendanceCalender
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/title_month"
-        app:layout_constraintStart_toEndOf="@+id/title_month"
-        app:layout_constraintTop_toTopOf="@+id/title_month"
-        app:srcCompat="@drawable/ic_round_arrow_right_24px" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:padding="@dimen/calender_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

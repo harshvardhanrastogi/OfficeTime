@@ -32,4 +32,12 @@ object CalenderUtil {
 
     @JvmStatic
     fun getCurrentYear(): Int = cal.get(Calendar.YEAR)
+
+    @JvmStatic
+    fun getNumberOfDays(month: Int, year: Int): Int {
+        val calender = Calendar.getInstance()
+        calender.set(Calendar.YEAR, year)
+        calender.set(Calendar.MONTH, month)
+        return calender.getActualMaximum(Calendar.DAY_OF_MONTH)
+    }
 }

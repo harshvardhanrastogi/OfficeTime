@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="32dp"
     android:layout_height="32dp"
-    android:background="@drawable/date_view_circle_bg"
+    android:background="@drawable/drawable_date_bg"
     android:orientation="vertical"
     android:gravity="center"
     android:textSize="16sp"

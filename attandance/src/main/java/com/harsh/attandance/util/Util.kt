@@ -84,4 +84,29 @@ object CalendarUtil {
     @JvmStatic
     fun getIntMonth(month: String) = months.indexOf(month) + 1
 
+    @JvmStatic
+    fun isTodaysDate(day: Int, month: Int, year: Int): Boolean {
+        val tDay = cal.get(Calendar.DATE)
+        if (day != tDay) {
+            return false
+        }
+
+        val tMon = getCurrentMonthInt()
+        if (month != tMon) {
+            return false
+        }
+
+        val tYear = getCurrentYear()
+        if (year != tYear) {
+            return false
+        }
+        return true
+    }
+
+    @JvmStatic
+    fun isWeekend(day: Int, firstDay: Int): Boolean {
+        if ((day + firstDay - 1) % 7 == 0 || (day + firstDay - 1) % 7 == 6) return true
+        return false
+    }
+
 }

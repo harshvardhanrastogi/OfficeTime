@@ -1,6 +1,7 @@
 package com.harsh.attandance.widget
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Rect
 import android.text.TextUtils
 import android.util.AttributeSet
@@ -18,12 +19,15 @@ import com.harsh.attandance.font.FontProvider
 import com.harsh.attandance.util.CalendarUtil
 import kotlin.math.max
 
+const val TAG_WEEK_PRE = "WEEK_"
+const val TAG = "AttendanceCalender"
+const val LAST_MONTH = "dec"
+const val FIRST_MONTH = "jan"
+
 class AttendanceCalender : ViewGroup, View.OnClickListener {
 
     private var fontProvider: FontProvider
     private var childLayoutRect: Rect = Rect()
-    private val TAG = "AttendanceCalender"
-    private val TAG_WEEK_PRE = "WEEK_"
     private lateinit var monthTitleView: AppCompatTextView
     private lateinit var yearTitleView: AppCompatTextView
     private var margin8dp: Int = 0
@@ -32,6 +36,7 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
     private val inflater: LayoutInflater
     var dateSelectedListener: OnDateSelectedListener? = null
     private val dateClickListener = OnDateClickListener()
+
     constructor (context: Context?) : this(context, null)
     constructor(context: Context?, attributeSet: AttributeSet?) : this(context, attributeSet, -1)
     constructor(context: Context?, attributeSet: AttributeSet?, defStyle: Int) : super(
@@ -111,7 +116,17 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
             inflater.inflate(R.layout.layout_date_view, this, false) as TextView
         dateTextView.tag = "date"
         dateTextView.text = i.toString()
+        dateTextView.typeface = fontProvider.getDroidSerifRegular()
         dateTextView.setOnClickListener(dateClickListener)
+        if (CalendarUtil.isTodaysDate(i, month, year)) {
+            dateTextView.isSelected = true
+            dateTextView.setTextColor(Color.WHITE)
+        }
+
+        if (CalendarUtil.isWeekend(i, CalendarUtil.getFirstDayOfWeek(month, year))) {
+            dateTextView.setBackgroundResource(R.drawable.drawable_day_weekend)
+            dateTextView.setTextColor(Color.WHITE)
+        }
         addView(dateTextView)
     }
 
@@ -120,6 +135,8 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
             val monTextView = AppCompatTextView(context)
             val day = resources.getStringArray(R.array.week_days)[i]
             monTextView.text = day
+            monTextView.typeface = fontProvider.getDroidSerifRegular()
+            monTextView.setTextColor(ContextCompat.getColor(context, R.color.colorWeekDay))
             monTextView.setTextSize(
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.week_day_size)
@@ -254,6 +271,7 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
         return rect
     }
 
+
     override fun onClick(v: View?) {
         v?.tag?.let {
             val tag = v.tag.toString()
@@ -262,7 +280,7 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
                     val month = CalendarUtil.getPreviousMonth(monthTitleView.text.toString())
                     monthTitleView.text = month
                     this.month = CalendarUtil.getIntMonth(month!!)
-                    if (TextUtils.equals(monthTitleView.text.toString().toLowerCase(), "dec")) {
+                    if (TextUtils.equals(monthTitleView.text.toString().toLowerCase(), LAST_MONTH)) {
                         val preYear = Integer.parseInt(yearTitleView.text.toString()) - 1
                         yearTitleView.text = preYear.toString()
                         year = preYear
@@ -275,7 +293,7 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
                     val month = CalendarUtil.getNextMonth(monthTitleView.text.toString())
                     monthTitleView.text = month
                     this.month = CalendarUtil.getIntMonth(month!!)
-                    if (TextUtils.equals(monthTitleView.text.toString().toLowerCase(), "jan")) {
+                    if (TextUtils.equals(monthTitleView.text.toString().toLowerCase(), FIRST_MONTH)) {
                         val nextYear = Integer.parseInt(yearTitleView.text.toString()) + 1
                         yearTitleView.text = nextYear.toString()
                         year = nextYear

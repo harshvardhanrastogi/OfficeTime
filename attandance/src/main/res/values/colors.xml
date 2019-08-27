@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorMonthTitle">#333333</color>
     <color name="colorYearTitle">#444444</color>
+    <color name="colorWeekDay">#222222</color>
+    <color name="colorWeekEndDay">#FFA000</color>
 </resources>

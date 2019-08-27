@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import com.harsh.attandance.R
 import com.harsh.attandance.font.FontProvider
 import com.harsh.attandance.util.CalendarUtil
-import kotlin.math.abs
 import kotlin.math.max
 
 class AttendanceCalender : ViewGroup, View.OnClickListener {
@@ -30,6 +29,7 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
     private var margin8dp: Int = 0
     private var month = 0
     private var year = 0
+    private val inflater: LayoutInflater
 
     constructor (context: Context?) : this(context, null)
     constructor(context: Context?, attributeSet: AttributeSet?) : this(context, attributeSet, -1)
@@ -38,6 +38,7 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
         attributeSet,
         defStyle
     ) {
+        inflater = LayoutInflater.from(context)
         margin8dp = resources.getDimension(R.dimen.margin_8dp).toInt()
         fontProvider = FontProvider(context!!)
         month = CalendarUtil.getCurrentMonthInt()
@@ -51,7 +52,10 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
     private fun addElements(context: Context) {
         monthTitleView = AppCompatTextView(context)
         monthTitleView.typeface = fontProvider.getRobotoReverseItalic()
-        monthTitleView.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.resources.getDimension(R.dimen.month_title_size))
+        monthTitleView.setTextSize(
+            TypedValue.COMPLEX_UNIT_PX,
+            context.resources.getDimension(R.dimen.month_title_size)
+        )
         monthTitleView.setTextColor(ContextCompat.getColor(context, R.color.colorMonthTitle))
         monthTitleView.tag = "monthTitleView"
         monthTitleView.text = CalendarUtil.getCurrentMonth()
@@ -71,7 +75,10 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
 
         yearTitleView = AppCompatTextView(context)
         yearTitleView.typeface = fontProvider.getRobotoReverseItalic()
-        yearTitleView.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.year_title_size))
+        yearTitleView.setTextSize(
+            TypedValue.COMPLEX_UNIT_PX,
+            resources.getDimension(R.dimen.year_title_size)
+        )
         yearTitleView.text = year.toString()
         yearTitleView.tag = "yearTitle"
         yearTitleView.setTextColor(ContextCompat.getColor(context, R.color.colorYearTitle))
@@ -79,19 +86,23 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
 
         addWeekDays(context)
 
-        addDates(context)
+        addDates()
 
     }
 
-    private fun addDates(context: Context) {
-        val inflator = LayoutInflater.from(context)
+    private fun addDates() {
         val dayInMonth = CalendarUtil.daysInMonth(month, year)
         for (i in 1..dayInMonth) {
-            val dateTextView: TextView = inflator.inflate(R.layout.layout_date_view, this, false) as TextView
-            dateTextView.tag = "date"
-            dateTextView.text = i.toString()
-            addView(dateTextView)
+            addDateView(i)
         }
+    }
+
+    private fun addDateView(i: Int) {
+        val dateTextView: TextView =
+            inflater.inflate(R.layout.layout_date_view, this, false) as TextView
+        dateTextView.tag = "date"
+        dateTextView.text = i.toString()
+        addView(dateTextView)
     }
 
     private fun addWeekDays(context: Context) {
@@ -99,7 +110,10 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
             val monTextView = AppCompatTextView(context)
             val day = resources.getStringArray(R.array.week_days)[i]
             monTextView.text = day
-            monTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.week_day_size))
+            monTextView.setTextSize(
+                TypedValue.COMPLEX_UNIT_PX,
+                resources.getDimension(R.dimen.week_day_size)
+            )
             monTextView.tag = TAG_WEEK_PRE + day
             addView(monTextView)
         }
@@ -130,7 +144,8 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
             }
 
         }
-        height += paddingTop + paddingBottom + 5 * paddingTop + dateHeight * 5
+        val numOfRows = if (CalendarUtil.getFirstDayOfWeek(month, year) == 7) 6 else 5
+        height += paddingTop + paddingBottom + numOfRows * paddingTop + dateHeight * numOfRows
         width = MeasureSpec.getSize(widthMeasureSpec)
         setMeasuredDimension(width, height)
 
@@ -153,7 +168,8 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
                 if (TextUtils.equals(child.tag.toString(), "monthNavLeft")) {
                     val left =
                         monthTitleView.left - child.measuredWidth - resources.getDimension(R.dimen.nav_arrow_margin).toInt()
-                    val top = monthTitleView.top + (monthTitleView.measuredHeight - child.measuredHeight) / 2
+                    val top =
+                        monthTitleView.top + (monthTitleView.measuredHeight - child.measuredHeight) / 2
                     val right = child.measuredWidth
                     val bottom = child.measuredHeight
                     childLayoutRect = initChildBounds(left, top, right, bottom)
@@ -162,14 +178,16 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
                 if (TextUtils.equals(child.tag.toString(), "monthNavRight")) {
                     val left =
                         monthTitleView.right + resources.getDimension(R.dimen.nav_arrow_margin).toInt()
-                    val top = monthTitleView.top + (monthTitleView.measuredHeight - child.measuredHeight) / 2
+                    val top =
+                        monthTitleView.top + (monthTitleView.measuredHeight - child.measuredHeight) / 2
                     val right = child.measuredWidth
                     val bottom = child.measuredHeight
                     childLayoutRect = initChildBounds(left, top, right, bottom)
                 }
 
                 if (TextUtils.equals(child.tag.toString(), "yearTitle")) {
-                    val left = monthTitleView.left + (monthTitleView.measuredWidth - child.measuredWidth) / 2
+                    val left =
+                        monthTitleView.left + (monthTitleView.measuredWidth - child.measuredWidth) / 2
                     val top = monthTitleView.bottom
                     val right = child.measuredWidth
                     val bottom = child.measuredHeight
@@ -186,12 +204,15 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
                     childLayoutRect = initChildBounds(left, top, right, bottom)
                 }
                 if (TextUtils.equals(child.tag.toString(), "date")) {
-                    val date = (child as TextView).text.toString().toInt()
                     val firstDayOfWeek = CalendarUtil.getFirstDayOfWeek(month, year)
-                    val dayTextView = findViewWithTag<View>(TAG_WEEK_PRE + "Mon")
+                    val date = (child as TextView).text.toString().toInt() + (firstDayOfWeek - 1)
+                    val dayTextView =
+                        findViewWithTag<View>(TAG_WEEK_PRE + "Mon")
                     val totalWidth = (width - paddingLeft - paddingRight) / 7
-                    val left = (paddingLeft + ((date  - 1) % 7) * totalWidth) + ((totalWidth - child.measuredWidth)) / 2
-                    val top = paddingTop + dayTextView.bottom + (date - 1) / 7 * child.measuredHeight + (date - 1) / 7 * paddingTop
+                    val left =
+                        (paddingLeft + ((date - 1) % 7) * totalWidth) + ((totalWidth - child.measuredWidth)) / 2
+                    val top =
+                        paddingTop + dayTextView.bottom + (date - 1) / 7 * child.measuredHeight + (date - 1) / 7 * paddingTop
                     val right = child.measuredWidth
                     val bottom = child.measuredHeight
                     childLayoutRect = initChildBounds(left, top, right, bottom)
@@ -200,7 +221,12 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
             }
 
 
-            child.layout(childLayoutRect.left, childLayoutRect.top, childLayoutRect.right, childLayoutRect.bottom)
+            child.layout(
+                childLayoutRect.left,
+                childLayoutRect.top,
+                childLayoutRect.right,
+                childLayoutRect.bottom
+            )
         }
     }
 
@@ -225,25 +251,52 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
                 TextUtils.equals(tag, "monthNavLeft") -> {
                     val month = CalendarUtil.getPreviousMonth(monthTitleView.text.toString())
                     monthTitleView.text = month
+                    this.month = CalendarUtil.getIntMonth(month!!)
                     if (TextUtils.equals(monthTitleView.text.toString().toLowerCase(), "dec")) {
-                        yearTitleView.text = (Integer.parseInt(yearTitleView.text.toString()) - 1).toString()
+                        val preYear = Integer.parseInt(yearTitleView.text.toString()) - 1
+                        yearTitleView.text = preYear.toString()
+                        year = preYear
                     }
+                    removeAllDateViews()
+                    addDates()
                 }
 
                 TextUtils.equals(tag, "monthNavRight") -> {
                     val month = CalendarUtil.getNextMonth(monthTitleView.text.toString())
                     monthTitleView.text = month
+                    this.month = CalendarUtil.getIntMonth(month!!)
                     if (TextUtils.equals(monthTitleView.text.toString().toLowerCase(), "jan")) {
-                        yearTitleView.text =
-                            (Integer.parseInt(yearTitleView.text.toString()) + 1).toString()
+                        val nextYear = Integer.parseInt(yearTitleView.text.toString()) + 1
+                        yearTitleView.text = nextYear.toString()
+                        year = nextYear
                     }
+                    removeAllDateViews()
+                    addDates()
                 }
 
             }
         }
     }
 
+    private fun removeAllDateViews() {
+        for (i in 1..childCount) {
+            val tv = findDateViewWithDate(i)
+            tv?.let {
+                removeView(tv)
+            }
+        }
+    }
+
     private fun getStringRepOfDay(day: Int) = resources.getStringArray(R.array.week_days)[day - 1]
 
-
+    private fun findDateViewWithDate(date: Int): TextView? {
+        for (i in 0 until childCount) {
+            if (getChildAt(i) is TextView
+                && TextUtils.equals(date.toString(), (getChildAt(i) as TextView).text)
+            ) {
+                return getChildAt(i) as TextView
+            }
+        }
+        return null
+    }
 }

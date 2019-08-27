@@ -7,17 +7,22 @@ import java.text.DateFormatSymbols
 object CalendarUtil {
 
     private val cal = Calendar.getInstance()
+    private val months =
+        arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 
     @JvmStatic
-    fun getCurrentMonth(): String = cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.getDefault())
+    fun getCurrentMonth(): String =
+        cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.getDefault())
 
     @JvmStatic
-    fun getCurrentMonthInt(): Int = cal.get(Calendar.MONTH)
+    fun getCurrentMonthInt(): Int = cal.get(Calendar.MONTH) + 1
 
     @JvmStatic
     fun getNextMonth(currentMonth: String): String? {
         val monthShort = arrayOfNulls<String>(12)
-        DateFormatSymbols().months.forEachIndexed { index, month -> monthShort[index] = month.substring(0, 3) }
+        DateFormatSymbols().months.forEachIndexed { index, month ->
+            monthShort[index] = month.substring(0, 3)
+        }
         if ((monthShort.indexOf(currentMonth) + 1) == monthShort.size) {
             return monthShort[0]
         }
@@ -27,7 +32,9 @@ object CalendarUtil {
     @JvmStatic
     fun getPreviousMonth(currentMonth: String): String? {
         val monthShort = arrayOfNulls<String>(12)
-        DateFormatSymbols().months.forEachIndexed { index, month -> monthShort[index] = month.substring(0, 3) }
+        DateFormatSymbols().months.forEachIndexed { index, month ->
+            monthShort[index] = month.substring(0, 3)
+        }
         if ((monthShort.indexOf(currentMonth) - 1) < 0) {
             return monthShort[11]
         }
@@ -71,7 +78,10 @@ object CalendarUtil {
             dow += daysInMonth(i, year)
         }
 
-        return dow % 7
+        return if (dow % 7 == 0) 7 else dow % 7
     }
+
+    @JvmStatic
+    fun getIntMonth(month: String) = months.indexOf(month) + 1
 
 }

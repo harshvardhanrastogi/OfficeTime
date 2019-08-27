@@ -30,7 +30,8 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
     private var month = 0
     private var year = 0
     private val inflater: LayoutInflater
-
+    var dateSelectedListener: OnDateSelectedListener? = null
+    private val dateClickListener = OnDateClickListener()
     constructor (context: Context?) : this(context, null)
     constructor(context: Context?, attributeSet: AttributeSet?) : this(context, attributeSet, -1)
     constructor(context: Context?, attributeSet: AttributeSet?, defStyle: Int) : super(
@@ -97,11 +98,20 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
         }
     }
 
+
+    inner class OnDateClickListener : OnClickListener {
+        override fun onClick(p0: View?) {
+            dateSelectedListener?.onDateSelected((p0 as TextView).text.toString().toInt(), month, year)
+        }
+    }
+
+
     private fun addDateView(i: Int) {
         val dateTextView: TextView =
             inflater.inflate(R.layout.layout_date_view, this, false) as TextView
         dateTextView.tag = "date"
         dateTextView.text = i.toString()
+        dateTextView.setOnClickListener(dateClickListener)
         addView(dateTextView)
     }
 
@@ -299,4 +309,10 @@ class AttendanceCalender : ViewGroup, View.OnClickListener {
         }
         return null
     }
+
+    interface OnDateSelectedListener {
+        fun onDateSelected(day: Int, month: Int, year: Int)
+    }
+
+
 }

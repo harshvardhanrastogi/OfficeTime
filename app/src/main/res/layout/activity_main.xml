@@ -9,6 +9,7 @@
 
 
     <com.harsh.attandance.widget.AttendanceCalender
+        android:id="@+id/attendance_cal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/calender_padding"

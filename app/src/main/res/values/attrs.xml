@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="OTTextView">
+        <attr name="fontEnum" format="enum">
+            <enum name="DroidSerif" value="0" />
+            <enum name="Reavers" value="1" />
+        </attr>
+        <attr name="android:textStyle" />
+    </declare-styleable>
+</resources>

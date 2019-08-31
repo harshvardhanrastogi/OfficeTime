@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">OfficeTime</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_user_name">User Name</string>
+    <string name="text_login">Login</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="text_email">Email</string>
+    <string name="text_signup">Signup</string>
 </resources>

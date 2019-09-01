@@ -22,6 +22,7 @@
         android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="#EEEEEE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -37,7 +38,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="42dp"
         android:text="@string/app_name"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="42sp"
         android:textStyle="bold"
         app:fontEnum="Reavers"
@@ -63,7 +64,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryLight">
 
             <com.harsh.officetime.widget.OTTextView
                 android:id="@+id/tab_login"
@@ -73,7 +75,7 @@
                 android:paddingTop="@dimen/margin_8dp"
                 android:paddingBottom="@dimen/margin_8dp"
                 android:text="@string/text_login"
-                android:textColor="#666666"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/tab_signup"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -88,7 +90,7 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
-                android:background="#1D86FE"
+                android:background="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toStartOf="@+id/tab_signup"
                 app:layout_constraintStart_toStartOf="@+id/tab_login"
                 app:layout_constraintTop_toBottomOf="@+id/tab_login" />
@@ -101,7 +103,7 @@
                 android:paddingTop="@dimen/margin_8dp"
                 android:paddingBottom="@dimen/margin_8dp"
                 android:text="@string/text_signup"
-                android:textColor="#666666"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -112,7 +114,7 @@
                 android:id="@+id/tab_line_signup"
                 android:layout_width="40dp"
                 android:layout_height="2dp"
-                android:background="#1D86FE"
+                android:background="@color/colorPrimaryDark"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/tab_signup"
                 app:layout_constraintStart_toStartOf="@+id/tab_signup"

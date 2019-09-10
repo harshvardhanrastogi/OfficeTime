@@ -57,13 +57,13 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-class LoginSignupViewPagerAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
+class LoginSignupViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> LoginFragment()
             1 -> SignupFragment()
-            else -> null
+            else -> LoginFragment()
         }
     }
 

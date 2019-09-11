@@ -35,7 +35,7 @@ class OTTextView : AppCompatTextView, View.OnClickListener {
 
     override fun onClick(v: View?) {
         if (animate) {
-            AnimationCreator.createTouchAnim(WeakReference(this), 0.92f).start()
+            AnimationCreator.createScaleAnim(WeakReference(this), 0.92f).start()
         }
         onClickListener?.onClick(v)
     }

@@ -13,11 +13,13 @@
     <style name="LoginStyleAppearance" parent="TextAppearance.AppCompat">
         <item name="android:background">@drawable/semi_circle_bar</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:drawablePadding">16dp</item>
+        <item name="android:drawablePadding">8dp</item>
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingRight">16dp</item>
         <item name="android:maxLines">1</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="LoginButtonStyleAppearance" parent="TextAppearance.AppCompat">

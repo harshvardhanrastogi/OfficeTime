@@ -1,5 +1,7 @@
 package com.harsh.officetime.anim
 
+import android.animation.Animator
+import android.animation.Animator.AnimatorListener
 import android.animation.AnimatorSet
 import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
@@ -10,7 +12,7 @@ import java.lang.ref.WeakReference
 
 object AnimationCreator {
 
-    fun createTouchAnim(viewRef: WeakReference<View>?, scaleFactor: Float): AnimatorSet {
+    fun createScaleAnim(viewRef: WeakReference<View>?, scaleFactor: Float): AnimatorSet {
 
         val scaleDownAnim = ValueAnimator()
         val p1 = PropertyValuesHolder.ofFloat("scaleX", 1f, scaleFactor)
@@ -36,6 +38,41 @@ object AnimationCreator {
         scaleDownAnim.addUpdateListener(animUpdateListener)
         scaleUpAnim.addUpdateListener(animUpdateListener)
         return animatorSet
+    }
+
+
+    fun createScaleDownAnimation(viewRef: WeakReference<View>?, scaleFactor: Float): ValueAnimator {
+        val scaleDownAnim = ValueAnimator()
+        val p1 = PropertyValuesHolder.ofFloat("scaleX", 1f, scaleFactor)
+        val p2 = PropertyValuesHolder.ofFloat("scaleY", 1f, scaleFactor)
+        scaleDownAnim.setValues(p1, p2)
+        scaleDownAnim.duration = 200
+        scaleDownAnim.interpolator = AccelerateInterpolator()
+        scaleDownAnim.addUpdateListener {
+            val scaleX: Float = it.getAnimatedValue("scaleX") as Float
+            val scaleY: Float = it.getAnimatedValue("scaleY") as Float
+            viewRef?.get()?.scaleX = scaleX
+            viewRef?.get()?.scaleY = scaleY
+        }
+        scaleDownAnim.addListener(object : AnimatorListener {
+            override fun onAnimationRepeat(p0: Animator?) {
+
+            }
+
+            override fun onAnimationEnd(p0: Animator?) {
+                viewRef?.get()?.scaleX = 1f
+                viewRef?.get()?.scaleY = 1f
+                viewRef?.get()?.visibility = View.GONE
+            }
+
+            override fun onAnimationCancel(p0: Animator?) {
+            }
+
+            override fun onAnimationStart(p0: Animator?) {
+            }
+
+        })
+        return scaleDownAnim
     }
 
     fun createLineStretchAnimation(viewRef: WeakReference<View>?): ValueAnimator {

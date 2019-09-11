@@ -33,7 +33,6 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:drawableLeft="@drawable/ic_email"
-        android:drawablePadding="16dp"
         android:hint="@string/text_email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +51,6 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:drawableLeft="@drawable/ic_password"
-        android:drawablePadding="16dp"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <com.harsh.officetime.widget.OTEditText
-        android:id="@+id/password2"
+        android:id="@+id/confirm_password"
         style="@style/LoginStyleAppearance"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -71,7 +69,6 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:drawableLeft="@drawable/ic_password"
-        android:drawablePadding="16dp"
         android:hint="@string/hint_confirm_password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,6 +85,55 @@
         android:text="@string/text_signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password2" />
+        app:layout_constraintTop_toBottomOf="@+id/confirm_password" />
+
+    <ImageView
+        android:id="@+id/img_err_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/username"
+        app:layout_constraintEnd_toEndOf="@+id/username"
+        app:layout_constraintTop_toTopOf="@+id/username"
+        app:srcCompat="@drawable/ic_warning" />
+
+    <ImageView
+        android:id="@+id/img_err_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/email"
+        app:layout_constraintEnd_toEndOf="@+id/email"
+        app:layout_constraintTop_toTopOf="@+id/email"
+        app:srcCompat="@drawable/ic_warning" />
+
+    <ImageView
+        android:id="@+id/img_err_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/password"
+        app:layout_constraintEnd_toEndOf="@+id/password"
+        app:layout_constraintTop_toTopOf="@+id/password"
+        app:srcCompat="@drawable/ic_warning" />
+
+    <ImageView
+        android:id="@+id/img_err_confirm_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/confirm_password"
+        app:layout_constraintEnd_toEndOf="@+id/confirm_password"
+        app:layout_constraintTop_toTopOf="@+id/confirm_password"
+        app:layout_constraintVertical_bias="0.454"
+        app:srcCompat="@drawable/ic_warning" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,15 +8,15 @@ import com.harsh.officetime.font.FontProvider
 class OTEditText : AppCompatEditText {
 
     constructor (context: Context) : super(context) {
-        typeface = FontProvider(context).getDroidSerifBold()
+        typeface = FontProvider(context).getDroidSerifRegular()
     }
 
     constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
-        typeface = FontProvider(context).getDroidSerifBold()
+        typeface = FontProvider(context).getDroidSerifRegular()
     }
 
     constructor(context: Context, attributeSet: AttributeSet, defStyle: Int) : super(context, attributeSet, defStyle) {
-        typeface = FontProvider(context).getDroidSerifBold()
+        typeface = FontProvider(context).getDroidSerifRegular()
     }
 
 

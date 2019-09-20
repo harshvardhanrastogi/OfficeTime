@@ -2,6 +2,8 @@ package com.harsh.officetime
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -14,6 +16,8 @@ import java.lang.ref.WeakReference
 class MainActivity : AppCompatActivity() {
 
     private var lastPageIndex: Int = 0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_signup_layout)
@@ -31,7 +35,11 @@ class MainActivity : AppCompatActivity() {
         }
         viewpager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
                 if (lastPageIndex != position) {
                     when (position) {
@@ -47,11 +55,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
+
     }
+
+
 
     fun onTabClicked(tabLineSelected: View?, tabLineDeselected: View?) {
         tabLineSelected?.visibility = View.VISIBLE
-        tabLineSelected?.let { AnimationCreator.createLineStretchAnimation(WeakReference(tabLineSelected)).start() }
+        tabLineSelected?.let {
+            AnimationCreator.createLineStretchAnimation(
+                WeakReference(
+                    tabLineSelected
+                )
+            ).start()
+        }
         tabLineDeselected?.visibility = View.INVISIBLE
     }
 

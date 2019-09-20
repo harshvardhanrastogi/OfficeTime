@@ -13,7 +13,7 @@
         android:background="@drawable/gradient_background"
         app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="0.4" />
@@ -30,22 +30,8 @@
         app:layout_constraintTop_toBottomOf="@+id/view"
         app:layout_constraintVertical_weight="0.6" />
 
-    <com.harsh.officetime.widget.OTTextView
-        android:id="@+id/titleTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="42dp"
-        android:text="@string/app_name"
-        android:textColor="@android:color/black"
-        android:textSize="42sp"
-        android:textStyle="bold"
-        app:fontEnum="Reavers"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view" />
-
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
@@ -58,7 +44,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent=".55"
+        app:layout_constraintHeight_percent=".58"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view">
 
@@ -66,21 +52,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimaryLight">
-
-            <com.harsh.officetime.widget.OTTextView
-                android:id="@+id/tab_login"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="@dimen/margin_8dp"
-                android:paddingBottom="@dimen/margin_8dp"
-                android:text="@string/text_login"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/tab_signup"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:id="@+id/tab_line_login"
@@ -94,21 +65,6 @@
                 app:layout_constraintEnd_toStartOf="@+id/tab_signup"
                 app:layout_constraintStart_toStartOf="@+id/tab_login"
                 app:layout_constraintTop_toBottomOf="@+id/tab_login" />
-
-            <com.harsh.officetime.widget.OTTextView
-                android:id="@+id/tab_signup"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="@dimen/margin_8dp"
-                android:paddingBottom="@dimen/margin_8dp"
-                android:text="@string/text_signup"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/tab_login"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:id="@+id/tab_line_signup"
@@ -132,9 +88,53 @@
                 app:layout_constraintVertical_bias="0.0">
 
             </androidx.viewpager.widget.ViewPager>
+
+            <com.harsh.officetime.widget.OTTextView
+                android:id="@+id/tab_login"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="@dimen/margin_8dp"
+                android:paddingBottom="@dimen/margin_8dp"
+                android:text="@string/text_login"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/tab_signup"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.harsh.officetime.widget.OTTextView
+                android:id="@+id/tab_signup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="@dimen/margin_8dp"
+                android:paddingBottom="@dimen/margin_8dp"
+                android:text="@string/text_signup"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tab_login"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
+    <com.harsh.officetime.widget.OTTextView
+        android:id="@+id/titleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="42dp"
+        android:text="@string/app_name"
+        android:textColor="@android:color/black"
+        android:textSize="42sp"
+        android:textStyle="bold"
+        app:fontEnum="Reavers"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

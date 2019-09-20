@@ -5,4 +5,5 @@
     <color name="colorPrimaryLight">#ffffbf</color>
     <color name="colorAccent">#cacc5d</color>
     <color name="colorProgress">#5f5dcc</color>
+    <color name="colorError">#FC5656</color>
 </resources>
